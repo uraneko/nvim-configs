@@ -1,0 +1,22 @@
+{
+  "start": [
+    "nvim-lspconfig",
+    "nvim-treesitter",
+    "nvim-treesitter-textobjects",
+    "plenary:nvim",
+    "telescope:nvim"
+  ],
+  "opt": [],
+  "themes": [
+    "darkrose:nvim",
+    "gruvsquirrel:nvim",
+    "kikwis",
+    "lighthaus:nvim",
+    "mellifluous:nvim",
+    "miasma:nvim",
+    "neovim-ayu",
+    "nvim",
+    "palenightfall:nvim",
+    "poimandres:nvim"
+  ]
+}
