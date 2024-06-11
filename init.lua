@@ -1,59 +1,56 @@
--- TODO: terminal convenience
 -- TODO: file navigation utilities conveniece
 -- INFO: flatten nvim and oil nvim
 -- TODO: order of require can be more effecient
 -- NOTE: operators can take the normal search as movement
 -- NOTE: i in V Mode acts the same as f in N Mode
+
+-- backstage plugins: nui, nio, web-dev-icons, plenary, codeicons,
+-- workspace plugins: notify, fidget, gitsigns, tls, fine-cmd, tls-cmd,
+-- in-buffer plugins: ufo, bqf, comment, surround, aerial,
+-- on-buffer plugins: lsp-config, lsp-format, lsp-lint, navic, ts, ts-ts, ts-to, dap, dap-ui, sttusline
+
+-- set leaders
+vim.g.leader = "`"
+vim.g.localleader = "<"
+
+-- convenient variable
+keymap_arg = { noremap = true, silent = false }
+map = vim.keymap.set
+inspect = vim.inspect
+
+-- allegedly enhances plugins load times
+vim.loader.enable()
+
+require "core:options"
+require "core:bindings"
+
+-- backstage plugins
 require "plenary.async"
+require "themes:configs"
+-- require "wd-icons:configs"
+-- require "codicons:configs"
+-- TODO: get rid of fine-cmdline nui dependency in favor of nio, ultimately removing both and using native ui capabilities
+-- no explicit import needed for nui, should be imported on use by fine-cmdline
+-- require "nui" -- dep for fine-cmdline
+-- require "nio" -- dep for dap-ui
 
--- mamba
-globals = require "mamba.globals"
+-- workspace plugins
+require "tls:configs"
+require "gitsigns:configs"
+require "fidget:configs"
+require "notify:configs"
+-- require "fine-cmdline:configs"
+-- NOTE: tls-cmdline plugin does not need to be imported, just import the tls extension and map it ':'
 
-modifiers = globals.modifiers
-map = globals.map
-arg = globals.arg
-i = globals.inspect
+-- on-buffer plugins
+require "ts:configs"
+require "sttusline:configs"
+require "lsp:configs"
+-- require "dap:configs" -- should be loaded only when needed
 
-require "mamba.options"
-require "mamba.bindings"
-require "mamba.setup"
-
--- treesitter
-require "TSIntegration.setup"
-require "TSIntegration.bindings"
-
--- telescope
-require "TLSIntegration.setup"
-require "TLSIntegration.bindings"
-
--- fennel
--- require "fennel.setup"
--- require "fennel.bindings"
-
--- LSP
-require "LSPIntegration.setup"
-require "LSPIntegration.bindings"
-
--- capybara
-require "capybara.setup"
-
--- myrmecia
--- alpaca
--- quetzal
--- gibbon
-
--- turaco
-require "turaco.setup"
-require "turaco.bindings"
--- myrmecia
--- alpaca
--- quetzal
--- gibbon
-
--- turaco
-require "turaco.setup"
-require "turaco.bindings"
-
--- temporary plugins
-
-vim.cmd("colorscheme everblush")
+-- in-buffer plugins
+-- require "ufo:configs"
+-- require "bqf:configs"
+require "comment:configs"
+require "autoclose:configs"
+require "aerial:configs"
