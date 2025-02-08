@@ -93,21 +93,24 @@ dap.configurations.haskell = {
 	},
 }
 
-require("lazydev").setup({
-	"rcarriga/nvim-dap-ui", opts = {
-  library = {  "nvim-dap-ui"  }}
-})
-
 -- TODO: dap commands; require'dap'.step_over(), continue(), eval(), toggle_breakpoint()...
--- TODO: dapui commands 
-map('n', '<c-cr>', ':lua require("dapui").setup()<cr>', keymap_arg)
-map('n', '<c-\\>', ':lua require("dapui").toggle()<cr>', keymap_arg)
+-- TODO: dapui commands
+-- map('n', '<c-cr>', ':lua require("dapui").setup()<cr>', keymap_arg)
+map('n', '<a-\\>', ':lua require("dapui").toggle()<cr>', keymap_arg)
 
--- local dapui = require "dapui"
 -- return function()
--- 	require('dapui').setup()
--- 
--- 	-- local dap, dapui = require("dap"), require("dapui")
+require('dapui').setup()
+
+
+map('n', '<a-b>', ':lua require("dap").toggle_breakpoint()<cr>', keymap_arg)
+map('n', '<a-c>', ':lua require("dap").continue()<cr>', keymap_arg)
+map('n', '<a-o>', ':lua require("dap").step_over()<cr>', keymap_arg)
+map('n', '<a-i>', ':lua require("dap").step_into()<cr>', keymap_arg)
+map('n', '<a-r>', ':lua require("dap").repl.open()<cr>', keymap_arg)
+map('n', '<a-l>', ':lua require("dap").repl.close()<cr>', keymap_arg)
+
+--
+-- 	local dap, dapui = require("dap"), require("dapui")
 -- 	dap.listeners.after.event_initialized["dapui_config"] = function()
 -- 		dapui.open({})
 -- 	end

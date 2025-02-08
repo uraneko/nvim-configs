@@ -23,11 +23,20 @@ function unpack_themes()
 			paints[i - 2] = theme
 		end
 	end
+	-- :lua print(vim.inspect(vim.api.nvim_list_runtime_paths()))
 
 	return paints
 end
 
--- :lua print(vim.inspect(vim.api.nvim_list_runtime_paths()))
-
+-- TODO: %#StatusFiller#%= set status fill space colors
 unpack_themes()
-vim.cmd("colorscheme everblush")
+vim.cmd("colorscheme yuejiu")
+
+
+-- vim.api.nvim_create_autocmd("ColorScheme", {
+-- 	desc = "reset status line bg color",
+-- 	group = "STTUSLINE_COMPONENT_EVENTS",
+-- 	callback = function(opts)
+-- 		vim.cmd("hi StatusLine guibg=#3c392d")
+-- 	end
+-- })

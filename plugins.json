@@ -1,22 +1,36 @@
 {
   "start": [
+    "aerial:nvim",
+    "Comment:nvim",
+    "fidget:nvim",
+    "gitsigns:nvim",
+    "lsp-format:nvim",
+    "neovim-codicons",
+    "nui:nvim",
+    "nvim-dap",
+    "nvim-dap-ui",
+    "nvim-dbee",
+    "nvim-lint",
     "nvim-lspconfig",
+    "nvim-navic",
+    "nvim-nio",
+    "nvim-notify",
     "nvim-treesitter",
     "nvim-treesitter-textobjects",
+    "nvim-treesitter-textsubjects",
+    "nvim-ts-autotag",
+    "nvim-web-devicons",
     "plenary:nvim",
     "telescope:nvim"
   ],
   "opt": [],
   "themes": [
     "darkrose:nvim",
-    "gruvsquirrel:nvim",
-    "kikwis",
-    "lighthaus:nvim",
-    "mellifluous:nvim",
-    "miasma:nvim",
-    "neovim-ayu",
-    "nvim",
-    "palenightfall:nvim",
-    "poimandres:nvim"
+    "mellow:nvim",
+    "Relaxed-Green",
+    "revolutions:vim",
+    "vim-twilight",
+    "yuejiu",
+    "yugen:nvim"
   ]
 }

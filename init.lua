@@ -1,8 +1,8 @@
--- TODO: file navigation utilities conveniece
--- INFO: flatten nvim and oil nvim
--- TODO: order of require can be more effecient
--- NOTE: operators can take the normal search as movement
--- NOTE: i in V Mode acts the same as f in N Mode
+-- NOTE: operators can take the normal search '/' as movement
+-- NOTE: i in V Mode acts kinda the same as f in N Mode
+-- TODO: plugins should be imported by importance
+-- ie, if you want Comment plugin no matter what,
+-- then dont put it after stt plugin import that you might break later
 
 -- backstage plugins: nui, nio, web-dev-icons, plenary, codeicons,
 -- workspace plugins: notify, fidget, gitsigns, tls, fine-cmd, tls-cmd,
@@ -24,33 +24,24 @@ vim.loader.enable()
 require "core:options"
 require "core:bindings"
 
--- backstage plugins
 require "plenary.async"
-require "themes:configs"
--- require "wd-icons:configs"
--- require "codicons:configs"
--- TODO: get rid of fine-cmdline nui dependency in favor of nio, ultimately removing both and using native ui capabilities
--- no explicit import needed for nui, should be imported on use by fine-cmdline
--- require "nui" -- dep for fine-cmdline
--- require "nio" -- dep for dap-ui
+vim.notify = require "fidget".setup {}
+vim.notify = require "notify"
+vim.notify.setup {
+	background_colour = "#000000",
+}
 
--- workspace plugins
-require "tls:configs"
-require "gitsigns:configs"
-require "fidget:configs"
-require "notify:configs"
--- require "fine-cmdline:configs"
--- NOTE: tls-cmdline plugin does not need to be imported, just import the tls extension and map it ':'
 
--- on-buffer plugins
-require "ts:configs"
-require "sttusline:configs"
-require "lsp:configs"
--- require "dap:configs" -- should be loaded only when needed
+require "_gitsigns"
+require "comment"
+require "_aerial"
+require "lsp"
+require "nio" -- dep for dap-ui
+require "_dap"
+-- require "nvim-ts-autotag".setup()
+require "tls"
+require "ts"
+require "themes"
+require "statusline"
 
--- in-buffer plugins
--- require "ufo:configs"
--- require "bqf:configs"
-require "comment:configs"
-require "autoclose:configs"
-require "aerial:configs"
+require("dbee").setup()

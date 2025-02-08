@@ -1,40 +1,51 @@
 local lsp_config = require "lspconfig"
 local lsp_format = require "lsp-format"
-local navic = require "nvim-navic"
--- 🖌
+navic = require "nvim-navic"
+
 navic.setup {
-  icons = {
-    File = ' ',
-    Module = ' ',
-    Namespace = ' ',
-    Package = ' ',
-    Class = ' ',
-    Method = ' ',
-    Property = ' ',
-    Field = ' ',
-    Constructor = ' ',
-    Enum = ' ',
-    Interface = ' ',
-    Function = ' ',
-    Variable = ' ',
-    Constant = ' ',
-    String = ' ',
-    Number = ' ',
-    Boolean = ' ',
-    Array = ' ',
-    Object = ' ',
-    Key = ' ',
-    Null = ' ',
-    EnumMember = ' ',
-    Struct = ' ',
-    Event = ' ',
-    Operator = ' ',
-    TypeParameter = ' '
-  }
+	icons = {
+		File = ' ',
+		Module = ' ',
+		Namespace = ' ',
+		Package = ' ',
+		Class = ' ',
+		Method = ' ',
+		Property = ' ',
+		Field = ' ',
+		Constructor = ' ',
+		Enum = ' ',
+		Interface = ' ',
+		Function = ' ',
+		Variable = ' ',
+		Constant = ' ',
+		String = ' ',
+		Number = ' ',
+		Boolean = ' ',
+		Array = ' ',
+		Object = ' ',
+		Key = ' ',
+		Null = ' ',
+		EnumMember = ' ',
+		Struct = ' ',
+		Event = ' ',
+		Operator = ' ',
+		TypeParameter = ' '
+	}
 }
+
+
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+	vim.lsp.diagnostic.on_publish_diagnostics, {
+		underline = false,
+		update_in_insert = true,
+		signs = true,
+		virtual_text = true,
+	}
+)
 
 local on_attach = function(client, bufnr)
 	lsp_format.on_attach(client, bufnr)
+	client.server_capabilities.semanticTokensProvider = nil
 	if client.server_capabilities.documentSymbolProvider then
 		navic.attach(client, bufnr)
 	end
@@ -69,10 +80,13 @@ lsp_config.gopls.setup {
 	on_attach = on_attach,
 }
 
+local home = vim.fn.expand("~")
+
 -- zig
+local zls_where = home .. "/.zig/lsp/zls/zig-out/bin/zls"
 lsp_config.zls.setup {
 	-- autostart = false,
-	cmd = { "/home/brownbread/.zig/lsp/zls/zig-out/bin/zls" },
+	cmd = { zls_where },
 	on_attach = on_attach,
 }
 
@@ -94,12 +108,13 @@ lsp_config.clangd.setup {
 	on_attach = on_attach,
 }
 
+local elixls_where = home .. "/.elixir/lsp/elixir-ls/bin/language_server.sh"
 lsp_config.elixirls.setup {
-	cmd = { "/home/brownbread/.elixir/lsp/elixir-ls/bin/language_server.sh" },
+	cmd = { elixls_where },
 	on_attach = on_attach
 }
 
-lsp_config.tsserver.setup {
+lsp_config.ts_ls.setup {
 	-- autostart = false,
 	on_attach = on_attach,
 	-- cmd = { "bunx", "tsserver", "--stdio" },
@@ -121,10 +136,10 @@ lsp_config.html.setup {
 	on_attach = on_attach,
 }
 
--- lsp_config.jsonls.setup {
--- 	on_attach = on_attach,
--- }
---
+lsp_config.jsonls.setup {
+	on_attach = on_attach,
+}
+
 -- lsp_config.dockerls.setup {
 -- 	on_attach = on_attach,
 -- }
@@ -133,22 +148,25 @@ lsp_config.html.setup {
 -- 	on_attach = on_attach,
 -- }
 --
--- lsp_config.yamlls.setup {
--- 	on_attach = on_attach,
--- }
+lsp_config.yamlls.setup {
+	on_attach = on_attach,
+}
 --
 -- lsp_config.bufls.setup {
 -- 	on_attach = on_attach,
 -- }
 
-local mod = "<c-"
+lsp_config.taplo.setup {
+	on_attach = on_attach,
+}
+
+local mod = "<s-"
 
 -- diag maneuvers
-map('n', mod .. 'Right>', ':lua vim.diagnostic.goto_prev()<cr>', keymap_arg)
-map('n', mod .. 'Left>', ':lua vim.diagnostic.goto_next()<cr>', keymap_arg)
+map('n', mod .. 'Left>', ':lua vim.diagnostic.goto_prev()<cr>', keymap_arg)
+map('n', mod .. 'Right>', ':lua vim.diagnostic.goto_next()<cr>', keymap_arg)
 
 -- map("n", lsp_mod .. "d", function() require("trouble").toggle("document_diagnostics") end, keymap_arg)
 -- map("TROUBLE", lsp_mod .. "d", function() require("trouble").toggle("document_diagnostics") end, keymap_arg)
 -- map('n', lsp_mod .. 'e>', ':lua vim.diagnostic.enable(0)<cr>', keymap_arg)
 -- vim.diagnostic.get(0, {severity = { vim.diagnostic.severity.WARN,}})
-

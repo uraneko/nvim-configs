@@ -30,7 +30,7 @@ require "nvim-treesitter.configs".setup {
 	},
 	autopairs = { enable = true },
 	autotag = { enable = true },
-	context_commentstring = { enable = true, enable_autocmd = false },
+	context_commentstring = { enable = true, enable_autocmd = true },
 	textobjects = {
 		lsp_interop = { enable = true },
 		select = {
@@ -69,12 +69,14 @@ require "nvim-treesitter.configs".setup {
 		},
 	},
 	textsubjects = {
-	    enable = true,
-	    prev_selection = ',', -- (Optional) keymap to select the previous selection
-	    keymaps = {
-	        ['<leader><leader>'] = 'textsubjects-smart',
-	        ['<leader-a>'] = 'textsubjects-container-outer',
-	        ['<leader-i>'] = { 'textsubjects-container-inner', desc = "Select inside containers (classes, functions, etc.)" },
-	    },
-        },
+		enable = true,
+		prev_selection = ',', -- (Optional) keymap to select the previous selection
+		keymaps = {
+			['<leader><leader>'] = 'textsubjects-smart',
+			['<leader-a>'] = 'textsubjects-container-outer',
+			['<leader-i>'] = { 'textsubjects-container-inner', desc = "Select inside containers (classes, functions, etc.)" },
+		},
+	},
 }
+-- hack to get rid of treesitter error: no parser for file type 'text', in telescope grep
+vim.treesitter.language.register('markdown', { 'text' })

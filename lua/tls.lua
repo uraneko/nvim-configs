@@ -13,21 +13,28 @@ tls.setup {
 		-- Default configuration for telescope goes here:
 		-- config_key = value,
 		layout_strategy = "flex",
+		mappings = {
+			i = {
+				["<cr>"] = function(bufnr)
+					require "telescope.actions.set".edit(bufnr, "tab drop")
+				end
+			}
+		}
 	},
 	pickers = {
-		cmdline = {
-			picker = {
-				layout_config = {
-					width  = 120,
-					height = 25,
-				}
-			},
-			mappings = {
-				complete      = '<Tab>',
-				run_selection = '<C-CR>',
-				run_input     = '<CR>',
-			},
-		},
+		-- cmdline = {
+		-- 	picker = {
+		-- 		layout_config = {
+		-- 			width  = 120,
+		-- 			height = 25,
+		-- 		}
+		-- 	},
+		-- 	mappings = {
+		-- 		complete      = '<Tab>',
+		-- 		run_selection = '<C-CR>',
+		-- 		run_input     = '<CR>',
+		-- 	},
+		-- },
 		live_grep = {
 			-- additional_args = function() return { "--max-depth=99", } end
 			max_depth = 99,
@@ -44,15 +51,14 @@ tls.setup {
 		-- builtin picker
 	},
 }
--- require "cmdline"
 -- if TLS is lazy loaded
-tls.load_extension("cmdline")
 tls.load_extension("notify")
 tls.load_extension("aerial")
 
 local mod = '<tab>'
 
 -- telescope
+map('n', mod .. 'o', ':Telescope oldfiles<CR>', keymap_arg)
 map('n', mod .. 'a', ':Telescope aerial<CR>', keymap_arg)
 map('n', mod .. 'g', ':Telescope live_grep <CR>', keymap_arg)
 map('n', mod .. 'b', ':Telescope current_buffer_fuzzy_find<cr>', keymap_arg)
@@ -60,6 +66,7 @@ map('n', mod .. 'c', ':Telescope git_commits<CR>', keymap_arg)
 map('n', mod .. 'n', ':Telescope notify<cr>', keymap_arg)
 map('n', mod .. 'd', ':Telescope diagnostics<cr>', keymap_arg)
 map('n', mod .. 't', ':Telescope colorscheme<cr>', keymap_arg)
+map('n', mod .. 'l', ':Telescope buffers<cr>', keymap_arg)
 
 -- map('n', '<space>', ':Telescope cmdline<CR>', { noremap = true, desc = "Cmdline" })
 -- map('n', mod .. 'f', ':Telescope find_files <CR>', keymap_arg)
