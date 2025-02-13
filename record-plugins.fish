@@ -24,6 +24,14 @@ function record_plugin_dir
 	set -a json " "🍤,🍔
 end
 
+function record_file
+	if test (count $argv) = 0
+		echo plugins.json
+	else
+		echo $argv[1]
+	end
+end
+
 for d in $plgn_dirs 
 	pushd $plgn_path/$d
 	echo -e $note_clr moving to plugins directory -- $d -- $ntrlz_clr
@@ -48,6 +56,6 @@ echo $json | xargs \
 		   | string replace -a "🍟🍔 " "🍟
 "\
 		   | string replace -a "🍤" "}" \
-		   | string replace -a "🍟" "{" > plugins.json
+		   | string replace -a "🍟" "{" > (record_file $argv[1])
 
 
