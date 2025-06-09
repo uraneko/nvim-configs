@@ -15,7 +15,7 @@ tls.setup {
 		layout_strategy = "flex",
 		mappings = {
 			i = {
-				["<cr>"] = function(bufnr)
+				["<c-cr>"] = function(bufnr)
 					require "telescope.actions.set".edit(bufnr, "tab drop")
 				end
 			}
