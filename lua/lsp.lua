@@ -59,7 +59,11 @@ lsp_config.rust_analyzer.setup {
 		['rust-analyzer'] = {
 			diagnostics = {
 				enable = true,
+				disabled = "inactive-code"
 			},
+			cargo = {
+				allFeatures = true,
+			}
 		},
 		-- ["rustfmt"] = {
 		-- 	use_small_heuristics = "Max",
@@ -108,32 +112,44 @@ lsp_config.clangd.setup {
 	on_attach = on_attach,
 }
 
+lsp_config.gleam.setup {
+	on_attach = on_attach,
+}
+
 local elixls_where = home .. "/.elixir/lsp/elixir-ls/bin/language_server.sh"
 lsp_config.elixirls.setup {
 	cmd = { elixls_where },
 	on_attach = on_attach
 }
 
-lsp_config.ts_ls.setup {
-	-- autostart = false,
-	on_attach = on_attach,
-	-- cmd = { "bunx", "tsserver", "--stdio" },
-	-- init_options = { hostInfo = "neovim" }
+-- lsp_config.ts_ls.setup {
+-- 	-- autostart = false,
+-- 	on_attach = on_attach,
+-- 	-- cmd = { "bunx", "tsserver", "--stdio" },
+-- 	-- init_options = { hostInfo = "neovim" }
+-- }
+
+lsp_config.vtsls.setup {
+	on_attach = on_attach
 }
 
-lsp_config.pyright.setup {
+lsp_config.pylyzer.setup {
 	-- autostart = false,
-	-- cmd = { "pyright" },
 	on_attach = on_attach,
 }
 
+lsp_config.superhtml.setup {
+	on_attach = on_attach,
+}
+
+lsp_config.sqls.setup {
+	on_attach = on_attach
+}
+
+-- TODO write my own css and json lsp to get rid of "vscode-langservers-extracted"
 lsp_config.cssls.setup {
 	on_attach = on_attach,
 	filetypes = { "css" },
-}
-
-lsp_config.html.setup {
-	on_attach = on_attach,
 }
 
 lsp_config.jsonls.setup {
@@ -147,18 +163,13 @@ lsp_config.jsonls.setup {
 -- lsp_config.docker_compose_language_service.setup {
 -- 	on_attach = on_attach,
 -- }
---
-lsp_config.yamlls.setup {
-	on_attach = on_attach,
-}
---
--- lsp_config.bufls.setup {
+
+-- taplo lsp is broken for me rn so disabling it
+-- lsp_config.taplo.setup {
 -- 	on_attach = on_attach,
 -- }
 
-lsp_config.taplo.setup {
-	on_attach = on_attach,
-}
+vim.lsp.enable("nushell")
 
 local mod = "<s-"
 
