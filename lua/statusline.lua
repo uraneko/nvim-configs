@@ -646,5 +646,8 @@ vim.api.nvim_create_autocmd({ "ColorScheme" }, {
 	callback = function()
 		hi()
 		vim.opt.background = "dark"
+		-- change comment foreground color to light gray
+		vim.cmd("hi @Comment guifg=#aaaaaa")
+		vim.cmd("hi @comment guifg=#aaaaaa")
 	end,
 })
