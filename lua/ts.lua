@@ -5,7 +5,7 @@ require "nvim-treesitter.configs".setup {
 	modules = {},
 	diagnostics = { disable = { "missing-fields" } },
 
-	ensure_installed = { "c", "lua", "query", "heex", "vim", "vimdoc", "comment", "elixir", "bash", "markdown", "regex", "rust",
+	ensure_installed = { "c", "lua", "query", "vim", "vimdoc", "comment", "elixir", "bash", "markdown", "regex", "rust",
 		"typescript", "gleam", "javascript", "css", "html", "go", "ocaml", "zig" },
 
 	sync_install = false,

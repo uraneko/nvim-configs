@@ -109,6 +109,8 @@ map('n', '<c-s-right>', ':tabnext<cr>', keymap_arg)
 map('n', '<c-s-left>', ':tabprev<cr>', keymap_arg)
 map('n', '🍜', ':tabnew<cr>', keymap_arg)
 map('n', '🍔', ':tabclose<cr>', keymap_arg)
+-- delete all buffers, keep current one
+map('n', '🐔', ':%bd|e#<cr>', keymap_arg)
 
 
 -- leavepre = function()
